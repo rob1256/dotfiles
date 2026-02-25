@@ -75,8 +75,9 @@ If empty, list available specs and ask the user to choose.
 
 **If the spec has `## Milestones`** (slow spec):
 
-For specs that are `in-progress`, check which milestones are already
-marked `[x]` and resume from the first unchecked milestone.
+For specs that are `in-progress`, check which milestones already have all
+three checklist items (`Dev done`, `Reviewed & approved`, `Committed`)
+marked `[x]` and resume from the first milestone with unchecked items.
 
 Execute milestones one at a time using this loop. **Do NOT skip steps.
 Do NOT combine milestones. Do NOT proceed without user approval.**
@@ -118,8 +119,9 @@ Do NOT combine milestones. Do NOT proceed without user approval.**
    user to respond. **This is the most important rule in this skill.**
 
 6. **If approved:** commit using `/commit` with the commit message
-   from the milestone. Then update the spec file: change the completed
-   milestone's `- [ ]` to `- [x]` and include this in the commit.
+   from the milestone. Then update the spec file: check off the
+   milestone's `Dev done`, `Reviewed & approved`, and `Committed`
+   items (`- [ ]` → `- [x]`) and include this in the commit.
 
 7. **If changes requested:** make the requested changes, re-run tests,
    and present again (go back to step 4).
