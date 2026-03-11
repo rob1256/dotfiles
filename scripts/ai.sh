@@ -24,6 +24,16 @@ backup_and_link_dir "$DOTFILES_DIR/config/claude/skills" "$HOME/.claude/skills"
 backup_and_link_dir "$DOTFILES_DIR/config/claude/agents" "$HOME/.claude/agents"
 
 # =============================================================================
+# OpenCode Configuration
+# =============================================================================
+
+echo "==> Configuring OpenCode"
+
+mkdir -p "$HOME/.config/opencode"
+
+backup_and_link "$DOTFILES_DIR/config/opencode/opencode.json" "$HOME/.config/opencode/opencode.json"
+
+# =============================================================================
 # TypeScript LSP for Claude Code
 # =============================================================================
 
