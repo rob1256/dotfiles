@@ -24,6 +24,31 @@ backup_and_link_dir "$DOTFILES_DIR/config/claude/skills" "$HOME/.claude/skills"
 backup_and_link_dir "$DOTFILES_DIR/config/claude/agents" "$HOME/.claude/agents"
 
 # =============================================================================
+# Claude Desktop BPP Wrapper App
+# =============================================================================
+
+echo "==> Installing Claude BPP desktop app"
+
+APP_TARGET="/Applications/Claude BPP.app"
+
+if [[ -d "/Applications/Claude.app" ]]; then
+	rm -rf "$APP_TARGET"
+
+	# Build a signed macOS applet via osacompile
+	# shellcheck disable=SC2016
+	osacompile -o "$APP_TARGET" -e '
+do shell script "/Applications/Claude.app/Contents/MacOS/Claude --user-data-dir=\"$HOME/Library/Application Support/Claude-BPP\" &> /dev/null &"
+'
+
+	# Copy icon from the real Claude app
+	cp "/Applications/Claude.app/Contents/Resources/electron.icns" "$APP_TARGET/Contents/Resources/AppIcon.icns"
+
+	echo "    Installed Claude BPP.app"
+else
+	echo "    Skipping: Claude.app not found"
+fi
+
+# =============================================================================
 # OpenCode Configuration
 # =============================================================================
 
