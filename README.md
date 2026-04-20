@@ -67,7 +67,9 @@ dotfiles/
 │   ├── git.sh               # Git config + SSH keys
 │   └── ai.sh                # AI tooling config
 ├── bin/
-│   └── init-copilot         # Bootstrap copilot instructions
+│   ├── dotfiles             # Dotfiles CLI (help, update, apply, edit)
+│   ├── init-copilot         # Bootstrap copilot instructions
+│   └── mlx                  # Local MLX server + model management
 └── config/
     ├── zsh/.zshrc           # Zsh + zinit config
     ├── kitty/kitty.conf     # Kitty terminal config
@@ -202,16 +204,22 @@ mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit \
 
 The `mlx-community` org on HF hosts pre-quantized models optimized for Apple Silicon. Models are cached under `~/.cache/huggingface/`.
 
-#### MLX Server (Ollama-style API)
+#### MLX CLI (server + model management)
 
-Run `mlx_lm.server` in the background and hit it with OpenAI-compatible requests. Model is selected per-request via the `model` field — no need to restart the server to switch models.
+The `mlx` command unifies background server control and Hugging Face cache management. Run `mlx_lm.server` in the background and hit it with OpenAI-compatible requests. Model is selected per-request via the `model` field — no need to restart the server to switch models.
 
 ```bash
-mlx-server start    # Start in background
-mlx-server status   # Show pid and URL
-mlx-server logs     # Tail the log
-mlx-server stop     # Stop
-mlx-server restart  # Restart
+# Server
+mlx start            # Start in background
+mlx status           # Show pid and URL
+mlx logs             # Tail the log
+mlx stop             # Stop
+mlx restart          # Restart
+
+# Models (wraps `hf` for the HF cache)
+mlx ls               # List cached models
+mlx pull mlx-community/Llama-3.2-3B-Instruct-4bit
+mlx rm mlx-community/Llama-3.2-3B-Instruct-4bit
 ```
 
 Default bind: `http://127.0.0.1:8080`. Override with `MLX_SERVER_HOST` / `MLX_SERVER_PORT`. Logs live at `~/.local/state/mlx-server/mlx-server.log`.
@@ -237,12 +245,26 @@ load-secrets  # Loads GITHUB_TOKEN and GITHUB_PACKAGES_TOKEN
 
 Never commit API keys or tokens.
 
+## 🧰 Dotfiles CLI
+
+A small CLI wraps the most common dotfiles operations and doubles as a discovery tool for the custom commands on this machine:
+
+```bash
+dotfiles help     # List commands, bin scripts, and zsh helpers (default)
+dotfiles update   # brew update + bundle + upgrade + cleanup
+dotfiles apply    # Re-run apply.sh (re-links configs, installs packages)
+dotfiles edit     # Open the dotfiles repo in $EDITOR
+dotfiles cd       # cd into ~/.dotfiles (zsh function)
+```
+
+`dotfiles cd` is provided by a zsh function that shadows the bin so it can change the current shell's directory; other subcommands run the bin in `bin/dotfiles`.
+
 ## 🔄 Updating Apps
 
 Update all Homebrew packages, casks, and Brewfile entries in one command:
 
 ```bash
-update-apps
+dotfiles update    # or: update-apps
 ```
 
 This runs `brew update`, installs any new Brewfile entries, upgrades all formulae and casks, and cleans up old versions.

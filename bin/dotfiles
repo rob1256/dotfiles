@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
+
+cmd_help() {
+	cat <<HELP
+Usage: dotfiles <command>
+
+Commands:
+  help         Show this help (default)
+  update       Update Homebrew, apps, and casks (wraps update-apps)
+  apply        Re-run apply.sh to relink configs and install packages
+  edit         Open the dotfiles repo in \$EDITOR
+  cd           Change to the dotfiles dir (zsh function only)
+
+Custom CLIs (in $DOTFILES_DIR/bin):
+  mlx          Local MLX inference server + model management
+  init-copilot Bootstrap GitHub Copilot config
+
+Zsh functions (defined in config/zsh/.zshrc):
+  load-secrets Load API keys from 1Password into the current shell
+  update-apps  Update Homebrew formulae and casks
+
+Layout:
+  apply.sh           Entry point — clones/pulls and runs scripts/*
+  scripts/           Setup scripts (packages, shell, git, ai, vscode)
+  config/            Dotfiles symlinked into \$HOME (claude, zsh, ...)
+  bin/               Custom executables added to PATH
+  Brewfile           Declarative brew packages
+HELP
+}
+
+cmd_update() {
+	if ! command -v brew &>/dev/null; then
+		echo "Homebrew not found"
+		return 1
+	fi
+
+	echo "Updating Homebrew..."
+	brew update
+
+	echo "Installing any new Brewfile entries..."
+	brew bundle --file="$DOTFILES_DIR/Brewfile"
+
+	echo "Upgrading formulae..."
+	brew upgrade
+
+	echo "Upgrading casks..."
+	brew upgrade --cask
+
+	echo "Cleaning up old versions..."
+	brew cleanup
+
+	echo "Apps updated"
+}
+
+cmd_apply() {
+	exec "$DOTFILES_DIR/apply.sh"
+}
+
+cmd_edit() {
+	local editor="${EDITOR:-code}"
+	exec $editor "$DOTFILES_DIR"
+}
+
+case "${1:-help}" in
+	help | -h | --help) cmd_help ;;
+	update) cmd_update ;;
+	apply) cmd_apply ;;
+	edit) cmd_edit ;;
+	cd)
+		echo "Error: 'dotfiles cd' must be run via the zsh function (not the bin)."
+		echo "Ensure the dotfiles() zsh function from .zshrc is loaded."
+		exit 1
+		;;
+	*)
+		echo "Unknown command: $1"
+		echo
+		cmd_help
+		exit 1
+		;;
+esac
