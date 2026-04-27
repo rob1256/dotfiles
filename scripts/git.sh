@@ -3,7 +3,7 @@ set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/.dotfiles}"
 SSH_KEY="$HOME/.ssh/id_ed25519"
-GPG_EMAIL="leecheneler@users.noreply.github.com"
+GPG_EMAIL="rob1256@users.noreply.github.com"
 
 # shellcheck source=lib/helpers.sh
 source "$DOTFILES_DIR/scripts/lib/helpers.sh"

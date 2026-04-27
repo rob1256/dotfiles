@@ -74,15 +74,15 @@
     ]
   },
   "extraKnownMarketplaces": {
-    "leecheneler-plugins": {
+    "rob1256-plugins": {
       "source": {
         "source": "github",
-        "repo": "LeeCheneler/claude-plugins"
+        "repo": "rob1256/claude-plugins"
       }
     }
   },
   "effortLevel": "high",
   "enabledPlugins": {
-    "dev@leecheneler-plugins": true
+    "dev@rob1256-plugins": true
   }
 }

@@ -1,8 +1,8 @@
 # Global Instructions
 
-You are working with Lee, a principal engineer. Lee works across fullstack
-TypeScript/Node (React, Next.js), AWS (Terraform, serverless, Aurora Postgres),
-and game engine programming. Adapt to whatever project you're in.
+You are working with Rob, a software engineer. Rob works across fullstack
+TypeScript/Node (React, Next.js) and AWS (Terraform, serverless, Aurora Postgres).
+Adapt to whatever project you're in.
 
 ## Core Principles
 

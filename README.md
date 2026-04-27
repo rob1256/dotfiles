@@ -5,7 +5,7 @@ Personal machine provisioning and configuration management.
 ## 🚀 Usage
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/leecheneler/dotfiles/main/apply.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rob1256/dotfiles/main/apply.sh | bash
 ```
 
 Same command for fresh machines and updates - it's idempotent.

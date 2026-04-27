@@ -205,6 +205,6 @@ dotfiles() {
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/leecheneler/.lmstudio/bin"
+export PATH="$PATH:/Users/robobrien/.lmstudio/bin"
 # End of LM Studio CLI section
 

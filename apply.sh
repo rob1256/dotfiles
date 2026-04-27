@@ -2,7 +2,7 @@
 set -euo pipefail
 
 DOTFILES_DIR="$HOME/.dotfiles"
-DOTFILES_REPO="https://github.com/leecheneler/dotfiles.git"
+DOTFILES_REPO="https://github.com/rob1256/dotfiles.git"
 
 echo "==> Applying dotfiles"
 

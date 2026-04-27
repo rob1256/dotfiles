@@ -1,6 +1,3 @@
-# Taps
-tap "leecheneler/tomo"
-
 # Core CLI tools
 brew "git"        # Version control
 brew "curl"       # HTTP requests
@@ -21,7 +18,6 @@ brew "mise"       # Polyglot runtime manager (Node, Deno, Python, etc.)
 brew "rust"       # Rust programming language (rustc + cargo)
 brew "gh"         # GitHub CLI
 brew "opencode"   # Terminal-based AI coding assistant
-brew "tomo"       # Task runner
 brew "starship"   # Cross-shell prompt
 
 # Document processing
