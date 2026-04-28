@@ -84,5 +84,9 @@
   "effortLevel": "high",
   "enabledPlugins": {
     "dev@rob1256-plugins": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
   }
 }
