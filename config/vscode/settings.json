@@ -165,7 +165,7 @@
   "terminal.integrated.smoothScrolling": true,
 
   // Workbench
-  "workbench.colorTheme": "Neon Cyberpunk",
+  "workbench.colorTheme": "Default Dark+",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.startupEditor": "none",
   "workbench.editor.enablePreview": false,
